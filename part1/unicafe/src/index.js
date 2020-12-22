@@ -24,7 +24,6 @@ const Statistics = ({good, neutral, bad}) => {
       <Statistic text="all" value={all} />
       <Statistic text="average" value={average} />
       <Statistic text="positive" value={positive + "%"} />
-
     </div>
   )
 }
@@ -51,7 +50,6 @@ const App = () => {
   return (
     <div>
       <h1>Give Feedback</h1>
-
       <Button handleClick={handleGoodClick} text="Good"/>
       <Button handleClick={handleNeutralClick} text="Neutral"/>
       <Button handleClick={handleBadClick} text="Bad"/>
