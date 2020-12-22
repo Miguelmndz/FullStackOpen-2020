@@ -1,186 +1,37 @@
-// import React from 'react'
-// import ReactDOM from 'react-dom'
-
-// const App = () => {
-//   const course = {
-//     name: 'Half Stack application development',
-//     parts: [
-//       {
-//         name: 'Fundamentals of React',
-//         exercise: 10
-//       },
-//       {
-//         name: 'Using props to pass data',
-//         exercise: 7
-//       },
-//       {
-//         name: 'State of a component',
-//         exercise: 14
-//       }
-//       ]
-//   }
-//   return (
-//     <div>
-//       <Header course = {course}/>
-//       <Content course = {course}/>
-//       <Total total = {course}/> 
-//     </div>
-//   )
-// }
-
-// const Header = (props) => {
-//   console.log(props)
-
-//   return(
-//   <div>
-//       <h1>{props.course.name}</h1>
-//   </div>
-//   )
-// }
-
-// const Part = (props) => {
-//   console.log(props)
-
-//   return (
-//   <div>
-//     <p>
-//       {props.name} {props.exercise}
-//     </p>
-//   </div>
-//   )
-// }
-// const Content = (props) => {
-//     console.log(props)
-
-//   return (
-//   <div>
-//     <Part name = {props.course.parts[0].name} exercise = {props.course.parts[0].exercise} />
-//     <Part name = {props.course.parts[1].name} exercise = {props.course.parts[1].exercise} />
-//     <Part name = {props.course.parts[2].name} exercise = {props.course.parts[2].exercise} />
-//   </div>
-//   )
-// }
-
-// const Total = (props) => {
-//   return (
-//   <div>
-//     <p>Number of exercises {props.total.parts[0].exercise + props.total.parts[1].exercise + props.total.parts[2].exercise}</p>
-//   </div>
-//   )
-// }
-
-//ReactDOM.render(<App />, document.getElementById('root'))
-
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
-// const Display = ({counter}) => <div>{counter}</div>
-  
+const Button = ({handleClick, text}) => {
+  return(
+    <div>
+    <button onClick={handleClick}>{text}</button>
+    </div>
+  )
+}
 
+const App = ({anecdotes}) => {
+  const [selected, setSelected] = useState(0)
 
-// const Button = ({handleClick, text}) => {
-//   return(
-//   <button onClick={handleClick}>
-//     {text}
-//   </button> 
-//   )
-// }
-
-// const App = () => {
-//   const [ counter, setCounter ] = useState(0)
-//   const increaseByOne = () => setCounter(counter + 1)
-//   const decreaseByOne = () => setCounter(counter - 1)
-//   const setToZero = () => setCounter(0)
-  
-//   return (
-//     <div>
-//       <Display counter = {counter} />
-//       <Button 
-//        handleClick={increaseByOne}
-//        text='plus' />
-//       <Button 
-//        handleClick={decreaseByOne}
-//        text='minus' />
-//       <Button 
-//        handleClick={setToZero}
-//        text='zero' />
-//     </div>
-//   )
-// }
-// ////////////////////////////////////////////
-// const App = () => {
-//   const [left, setLeft] = useState(0)
-//   const [right, setRight] = useState(0)
-//   const [allClicks, setAll] = useState([])
-
-//   const handleLeftClick = () => {
-//     setAll(allClicks.concat('L'))
-//     setLeft(left + 1)
-//   }
-
-//   const handleRightClick = () => {
-//     setAll(allClicks.concat('R'))
-//     setRight(right + 1)
-//   }
-
-//   return (
-//     <div>
-//       {left}
-//       <button onClick={handleLeftClick}>left</button>
-//       <button onClick={handleRightClick}>right</button>
-//       {right}
-//       <p>{allClicks.join('-')}</p>
-//     </div>
-//   )
-// }
-
-const History = ({allClicks}) => {
-
-  if (allClicks.length == 0) {
-    return (
-      <div>
-        The app is used by pressing the button
-      </div>
-    )
-  }
+  const handleClick = () => setSelected(Math.floor(Math.random() * anecdotes.length))
 
   return (
     <div>
-      Button press history: {allClicks.join('-')}
+      {anecdotes[selected]}
+      <Button handleClick={handleClick} text="next anecdotes"/>
     </div>
   )
-
 }
 
-const App = () => {
-  const [left, setLeft] = useState(0)
-  const [right,setRight] = useState(0)
-  const [allClicks, setClicks] = useState([])
-
-  const handleLeftClick = () => {
-    setClicks(allClicks.concat('L'))
-    setLeft(left + 1)
-  }
-
-  const handleRightClick = () => {
-    setClicks(allClicks.concat('R'))
-    setRight(right + 1)
-  }
-  return(
-    <div>
-      {left}
-      <button onClick={handleLeftClick}>Left</button>
-      <button onClick={handleRightClick}>Right</button>
-      {right}
-      <History allClicks={allClicks}/>
-    </div>
-  )
-
-
-}
+const anecdotes = [
+  'If it hurts, do it more often',
+  'Adding manpower to a late software project makes it later!',
+  'The first 90 percent of the code accounts for the first 90 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
+  'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
+  'Premature optimization is the root of all evil.',
+  'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.'
+]
 
 ReactDOM.render(
-  <App />, 
+  <App anecdotes={anecdotes} />,
   document.getElementById('root')
 )
-
