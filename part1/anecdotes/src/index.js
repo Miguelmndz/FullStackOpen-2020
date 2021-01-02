@@ -1,6 +1,18 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
+let animals = [
+  {name:'fig' , species: 'rabbit'},
+  {name:'BIG' , species: 'dog'},
+  {name:'car' , species: 'cat'},
+  {name:'rawr' , species: 'cat'}
+  
+]
+
+
+var names = animals.map( animals => animals.name === 'rawr' )
+
+
 const Button = ({handleClick, text}) => {
   return(
     <button onClick={handleClick}>{text}</button>
@@ -32,7 +44,9 @@ const App = ({anecdotes}) => {
     <div>
       <h2>Anecdote of the day</h2>
 
-      <p>{anecdotes[selected]}. <br/>Has {points[selected]} votes.</p>
+      <p>{anecdotes[selected]}. 
+      <br/>Has {points[selected]} votes.</p>
+
       <Button handleClick={handleClick} text="next anecdotes"/>
       <Button handleClick={handleVote} text="vote"/>
       
@@ -52,6 +66,7 @@ const anecdotes = [
   'Premature optimization is the root of all evil.',
   'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.'
 ]
+
 
 
 

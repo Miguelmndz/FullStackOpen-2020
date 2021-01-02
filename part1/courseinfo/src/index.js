@@ -70,9 +70,9 @@
 // }
 
 //ReactDOM.render(<App />, document.getElementById('root'))
-
-import React, { useState } from 'react'
-import ReactDOM from 'react-dom'
+///////////////////////////////////////////////////////////////////////////
+// import React, { useState } from 'react'
+// import ReactDOM from 'react-dom'
 
 // const Display = ({counter}) => <div>{counter}</div>
   
@@ -134,53 +134,103 @@ import ReactDOM from 'react-dom'
 //   )
 // }
 
-const History = ({allClicks}) => {
+// const History = ({allClicks}) => {
 
-  if (allClicks.length == 0) {
-    return (
-      <div>
-        The app is used by pressing the button
-      </div>
-    )
+//   if (allClicks.length == 0) {
+//     return (
+//       <div>
+//         The app is used by pressing the button
+//       </div>
+//     )
+//   }
+
+//   return (
+//     <div>
+//       Button press history: {allClicks.join('-')}
+//     </div>
+//   )
+
+// }
+
+// const App = () => {
+//   const [left, setLeft] = useState(0)
+//   const [right,setRight] = useState(0)
+//   const [allClicks, setClicks] = useState([])
+
+//   const handleLeftClick = () => {
+//     setClicks(allClicks.concat('L'))
+//     setLeft(left + 1)
+//   }
+
+//   const handleRightClick = () => {
+//     setClicks(allClicks.concat('R'))
+//     setRight(right + 1)
+//   }
+//   return(
+//     <div>
+//       {left}
+//       <button onClick={handleLeftClick}>Left</button>
+//       <button onClick={handleRightClick}>Right</button>
+//       {right}
+//       <History allClicks={allClicks}/>
+//     </div>
+//   )
+
+
+// }
+
+// ReactDOM.render(
+//   <App />, 
+//   document.getElementById('root')
+// )
+
+import React from 'react'
+import ReactDOM from 'react-dom'
+
+const notes = [
+  {
+    id: 1,
+    content: 'HTML is easy',
+    date: '2019-05-30T17:30:31.098Z',
+    important: true
+  },
+  {
+    id: 2,
+    content: 'Browser can execute only JavaScript',
+    date: '2019-05-30T18:39:34.091Z',
+    important: false
+  },
+  {
+    id: 3,
+    content: 'GET and POST are the most important methods of HTTP protocol',
+    date: '2019-05-30T19:20:14.298Z',
+    important: true
   }
+]
+
+const Notes = ({note}) => {
+return(
+  <li>
+    {note.content}
+  </li>
+)
+}
+
+
+const App = ({ notes }) => {
+  
 
   return (
     <div>
-      Button press history: {allClicks.join('-')}
+      <h1>Notes</h1>
+      <ul>
+        {notes.map(notes => <Notes key={notes.id} note={notes}/>)}
+      </ul>
     </div>
   )
-
-}
-
-const App = () => {
-  const [left, setLeft] = useState(0)
-  const [right,setRight] = useState(0)
-  const [allClicks, setClicks] = useState([])
-
-  const handleLeftClick = () => {
-    setClicks(allClicks.concat('L'))
-    setLeft(left + 1)
-  }
-
-  const handleRightClick = () => {
-    setClicks(allClicks.concat('R'))
-    setRight(right + 1)
-  }
-  return(
-    <div>
-      {left}
-      <button onClick={handleLeftClick}>Left</button>
-      <button onClick={handleRightClick}>Right</button>
-      {right}
-      <History allClicks={allClicks}/>
-    </div>
-  )
-
-
 }
 
 ReactDOM.render(
-  <App />, 
+  <App notes={notes} />,
   document.getElementById('root')
 )
-
