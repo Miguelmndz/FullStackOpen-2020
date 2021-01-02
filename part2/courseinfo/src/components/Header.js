@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Header = ({mainHeading,subHeading}) => {
+const Header = ({subHeading}) => {
   return(
     <div>
-      <h1>{mainHeading}</h1>
+      
       <h2>{subHeading}</h2>
 </div>
   )
