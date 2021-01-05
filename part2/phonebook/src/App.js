@@ -56,6 +56,8 @@ const App = () => {
   // control for input and allows use to keep track of what's inside
   const [ newName, setNewName ] = useState('Enter Name')
 
+  const [newPhoneNum, setNewPhone] = useState('Enter Phone Number')
+
   // Once the event has been triggered, prevent the page from reloading 
   // Target allows get the HTML element where the event happened
   const addNewPerson = (event) => {
@@ -65,13 +67,14 @@ const App = () => {
     const personFound = persons.find(obj => obj.name === newName)
     // Will add this new object with the type name to the state of persons array
     const personObject = {
-      name: newName
+      name: newName,
+      number: newPhoneNum
     }
     //ternary operater: if a person is found alert them otherwise add the person to the array of objects
     personFound ? window.alert(`${newName} is already added to the phonebook`) : setPersons(persons.concat(personObject))  
-
     // Will update the input state(newName) to an empty string
     setNewName('')
+    setNewPhone('')
   }
 
   // This will allow changes to be made from the input
@@ -79,10 +82,8 @@ const App = () => {
   // We have the input value declared to the state newName
   // Since it's a state it can only be changed through modify it though a state fuction
   // So we add a onChange handler that will call the fuction handleNameChange upon a change in input where the state is being updated by getting the value that's typed in the input
-  const handleNameChange = (event) => {
-    
-    setNewName(event.target.value)
-  }
+  const handleNameChange = event => setNewName(event.target.value)
+  const handleNumberChange = event => setNewPhone(event.target.value)
 
   return (
     <div>
@@ -93,6 +94,8 @@ const App = () => {
           onChange={handleNameChange} 
           value={newName} 
           />
+
+          number: <input value={newPhoneNum} onChange={handleNumberChange}/>
         </div>
         <div>
           <button type="submit">add</button>
