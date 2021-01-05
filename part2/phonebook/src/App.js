@@ -61,17 +61,15 @@ const App = () => {
   const addNewPerson = (event) => {
     // Prevent the default action of refershing the page
     event.preventDefault()
+     // loop though the persons array and for each object compare the names to get the value true or false
+    const personFound = persons.find(obj => obj.name === newName)
     // Will add this new object with the type name to the state of persons array
     const personObject = {
       name: newName
     }
-    
-    // loop though the persons array and for each object compare the names
-    if(persons.find(obj => obj.name === newName)) {
-      console.log('Found');
-    }
-    // Use the setPersons fuction to update the persons state by addomg a personObject
-    setPersons(persons.concat(personObject))
+    //ternary operater: if a person is found alert them otherwise add the person to the array of objects
+    personFound ? window.alert(`${newName} is already added to the phonebook`) : setPersons(persons.concat(personObject))  
+
     // Will update the input state(newName) to an empty string
     setNewName('')
   }
