@@ -51,12 +51,17 @@ import Person from './compenents/Person'
 const App = () => {
   // set state as an array of objects
   const [ persons, setPersons ] = useState([
-    { name: 'Arto Hellas' }
+    { name: 'Arto Hellas', number: '040-123456' },
+    { name: 'Ada Lovelace', number: '39-44-5323523' },
+    { name: 'Dan Abramov', number: '12-43-234345' },
+    { name: 'Mary Poppendieck', number: '39-23-6423122' }
   ]) 
   // control for input and allows use to keep track of what's inside
   const [ newName, setNewName ] = useState('Enter Name')
 
   const [newPhoneNum, setNewPhone] = useState('Enter Phone Number')
+
+  const [nameSearch, setNameSearch] = useState('')
 
   // Once the event has been triggered, prevent the page from reloading 
   // Target allows get the HTML element where the event happened
@@ -84,26 +89,48 @@ const App = () => {
   // So we add a onChange handler that will call the fuction handleNameChange upon a change in input where the state is being updated by getting the value that's typed in the input
   const handleNameChange = event => setNewName(event.target.value)
   const handleNumberChange = event => setNewPhone(event.target.value)
+  const handleFilter = event => setNameSearch(event.target.value)
+
+  // This is act as a catalyst to one of two arrays. It will first check if there any characters in the search 
+  // if so it will filter out a new array that includes the character that was typed, otherwise use the non-fitler array
+  const peopleToShow = nameSearch.length > 0 
+    ? persons.filter(person => person.name.toLowerCase().includes(nameSearch.toLowerCase())) 
+    : persons 
 
   return (
     <div>
       <h2>Phonebook</h2>
+      filter shown with <input 
+      value={nameSearch}
+      onChange={handleFilter}/>
+
       <form onSubmit={addNewPerson}>
+
         <div>
+          <h2>add a new</h2>
           name: <input 
           onChange={handleNameChange} 
           value={newName} 
           />
-
-          number: <input value={newPhoneNum} onChange={handleNumberChange}/>
+        <br/>
+          number: <input 
+          value={newPhoneNum} 
+          onChange={handleNumberChange}/>
         </div>
+
         <div>
           <button type="submit">add</button>
         </div>
+
       </form>
+
       <h2>Numbers</h2>
        {/* Loops through the persons array and for each elementthat's in the array, transform it to exicute a Persons compenent where it will display the name of that person */}
-      {persons.map((person,i) => <Person key={i}  name={person} />)}
+      {peopleToShow.map((person,i) => <Person key={i}  name={person} />)}
+      <br/>
+      {/* <li>
+        {persons.filter((person) => person.name.includes(nameSearch))}
+      </li> */}
     </div>
   )
 }
